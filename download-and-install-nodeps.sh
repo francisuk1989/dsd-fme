@@ -21,3 +21,16 @@ cmake ..
 make -j `nproc`
 sudo make install
 sudo ldconfig
+
+echo Do you need to keep the DSD-FME folder?
+echo y/N
+read ANSWER
+Y='y'
+
+if [[ $Y == $ANSWER ]]; then
+
+sudo rm -R dsd-fme
+
+if [[ $N == $ANSWER ]]; then
+
+Ok, I will keep the DSD-FME folder here.
