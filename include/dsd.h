@@ -979,6 +979,8 @@ void dmr_flco (dsd_opts * opts, dsd_state * state, uint8_t lc_bits[], uint32_t C
 void dmr_cspdu (dsd_opts * opts, dsd_state * state, uint8_t cs_pdu_bits[], uint8_t cs_pdu[], uint32_t CRCCorrect, uint32_t IrrecoverableErrors);
 void dmr_slco (dsd_opts * opts, dsd_state * state, uint8_t slco_bits[]);
 uint8_t dmr_cach (dsd_opts * opts, dsd_state * state, uint8_t cach_bits[25]);
+uint32_t dmr_34(uint8_t * input, uint8_t treturn[18]); //simplier trellis decoder
+void beeper (dsd_opts * opts, dsd_state * state, int type); //the tone beeper function
 
 //Embedded Alias and GPS
 void dmr_embedded_alias_header (dsd_opts * opts, dsd_state * state, uint8_t lc_bits[]);
@@ -1124,21 +1126,13 @@ void rtl_dev_tune(dsd_opts * opts, long int frequency);
 int rtl_return_rms();
 void rtl_clean_queue();
 #endif
-//DMR TRELLIS
-void CDMRTrellisTribitsToBits(const unsigned char* tribits, unsigned char* payload);
-unsigned int CDMRTrellisCheckCode(const unsigned char* points, unsigned char* tribits);
-bool CDMRTrellisFixCode(unsigned char* points, unsigned int failPos, unsigned char* payload);
-void CDMRTrellisDeinterleave(const unsigned char* data, signed char* dibits);
-void CDMRTrellisDibitsToPoints(const signed char* dibits, unsigned char* points);
-void CDMRTrellisPointsToDibits(const unsigned char* points, signed char* dibits);
-void CDMRTrellisBitsToTribits(const unsigned char* payload, unsigned char* tribits);
-bool CDMRTrellisDecode(const unsigned char* data, unsigned char* payload);
+
 
 //Phase 2 Helper Functions
 int ez_rs28_ess (int payload[96], int parity[168]); //ezpwd bridge for FME
 int ez_rs28_facch (int payload[156], int parity[114]); //ezpwd bridge for FME
 int ez_rs28_sacch (int payload[180], int parity[132]); //ezpwd bridge for FME
-int isch_lookup (unsigned long long int isch); //isch map lookup
+int isch_lookup (uint64_t isch); //isch map lookup
 int bd_bridge (int payload[196], uint8_t decoded[12]); //bridge to Michael Ossmann Block De-interleaver and 1/2 rate trellis decoder
 int crc16_lb_bridge (int payload[190], int len);
 int crc12_xb_bridge (int payload[190], int len);
